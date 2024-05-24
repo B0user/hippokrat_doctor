@@ -1,24 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+// Modules
+import { Routes, Route } from "react-router-dom";
+// Layouts
+import Layout from "./components/Layouts/Layout";
+import PersistLogin from "./components/Layouts/PersistLogin";
+// Login
+// import Register from "./features/auth/Register";
+import Login from "./features/auth/Login";
+import LoginRedirection from "./features/auth/LoginRedirection";
+import RequireAuth from "./components/Layouts/RequireAuth";
+// import LoginRedir from "./features/auth/LoginRedir";
+
+
+
+import Missing from "./components/Missing";
+import Unauthorized from "./components/Unauthorized";
+
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+
+import MenuSpravka from "./features/spravka/MenuSpravka";
+import CreateSpravka from "./features/spravka/CreateSpravka";
+
 
 function App() {
+  const [theme, colorMode] = useMode();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* change to redir later */}
+            <Route index element={<LoginRedirection />} /> 
+            <Route path="login" element={<Login />} />
+            {/* <Route path="register" element={<Register />} /> */}
+            <Route path="unauthorized" element={<Unauthorized />} />
+            <Route element={<PersistLogin />}>
+              {/* <Route path="/redir" element={<LoginRedir />} /> */}
+              <Route element={<RequireAuth/>}>
+
+                <Route path="spravka">
+                  <Route index element={<MenuSpravka />} />
+                  <Route path="create" element={<CreateSpravka/>} />
+                </Route>
+              </Route>
+
+              
+
+              
+            </Route>
+            <Route path="*" element={<Missing />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
