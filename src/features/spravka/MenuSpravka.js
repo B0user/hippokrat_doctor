@@ -132,6 +132,9 @@ const MenuSpravka = () => {
         </Box>
 
         <TableContainer component={Paper} sx={{ marginTop: 4 }}>
+		{data.length === 0 ? (
+              <p>У вас пока нет созданных справок</p>
+            ) : (
           <Table {...getTableProps()}>
             <TableHead>
               {headerGroups.map((headerGroup) => (
@@ -161,6 +164,7 @@ const MenuSpravka = () => {
               })}
             </TableBody>
           </Table>
+		  )}
         </TableContainer>
 
         <p>

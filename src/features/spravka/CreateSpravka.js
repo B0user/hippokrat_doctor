@@ -41,7 +41,7 @@ const CreateSpravka = () => {
   const userRef = useRef();
   const errRef = useRef();
 
-  const [type, setType] = useState("carpet");
+  const [type, setType] = useState("Гигиеническое обучение");
   const [firstname, setFirstname] = useState("");
   const [secondname, setSecondname] = useState("");
   const [middlename, setMiddlename] = useState("");
@@ -54,17 +54,16 @@ const CreateSpravka = () => {
 
   const componentRef = useRef();
   const { auth } = useAuth();
-    
-    
-
 
   useEffect(() => {
-    userRef.current.focus();
+    if (userRef.current) {
+      userRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
     setErrMsg("");
-  }, [firstname,secondname,middlename,iin]);
+  }, [firstname, secondname, middlename, iin]);
 
   const handleSubmit = async (e) => {
     try {
@@ -109,7 +108,7 @@ const CreateSpravka = () => {
       setFirstname("");
       setSecondname("");
       setMiddlename("");
-      setIin("");
+      // setIin("");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -138,14 +137,25 @@ const CreateSpravka = () => {
               subtitle="Информация о справке представлена ниже."
             />
 
-            <div ref={componentRef} className="printable-component">
-                <p>
-                Дата: {spravka?.date} <br />
-                Выдал: {spravka?.doctor_name} <br />
-                URL: {`${BASE_URL}/${spravka?._id}`}
-                </p>
-                <QRCode url={`${BASE_URL}/${spravka?._id}`} isImage={true} isButton={false} />
-            </div>
+          <div ref={componentRef} className="printable-component" >
+             <div style={{ display: 'flex', alignItems: 'center'}}>
+              <div style={{ marginRight: '20px' }}>
+                    <QRCode url={`${BASE_URL}/${spravka?._id}`} isImage={true} isButton={false} />
+                </div>
+                <div>
+                    <h3 fontSize="18px">ТОО «Медицинская фирма "Гиппократ"»</h3>
+                    <p style={{fontSize: '14px'}}>
+                      <b>Вид справки:</b> {spravka?.type} <br />
+                      <b>ИИН:</b> {iin} <br />
+                      <b>Пациенту:</b> {spravka?.patient_secondname} {spravka?.patient_firstname.charAt(0)}. {spravka?.patient_middlename.charAt(0)}. <br/>
+                      <b>Выдал:</b> {spravka?.doctor_name} <br />
+                      <b>Дата:</b> {spravka?.date} <br />
+                  </p>      
+                </div>
+             </div>
+              
+              
+          </div>
             
             <ReactToPrint
                 trigger={() => <Button variant="contained">Распечатать справку</Button>}
