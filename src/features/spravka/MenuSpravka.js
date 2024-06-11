@@ -1,13 +1,14 @@
 import React, { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { useTable, useSortBy, useFilters, useGlobalFilter } from "react-table";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { GlobalFilter, DefaultColumnFilter } from "../../components/TableFilters";
 import { BASE_URL } from "../../config";
+
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 
@@ -167,11 +168,7 @@ const MenuSpravka = () => {
 		  )}
         </TableContainer>
 
-        <p>
-          <span className="line">
-            <Link to="/spravka">Отмена</Link>
-          </span>
-        </p>
+        
       </Box>
     </>
   );
