@@ -18,31 +18,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import axios from '../../api/axios';
 
-
 const LOGIN_URL = '/auth';
-
-
-
-
-
-
-
-
-
-// function Copyright(props) {
-//     return (
-//       <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//         {'Copyright © '}
-//         <Link color="inherit" href="https://mui.com/">
-//           RN dev
-//         </Link>{' '}
-//         {new Date().getFullYear()}
-//         {'.'}
-//       </Typography>
-//     );
-//   }
-  
-
 
 const Login = () => {
     const { setAuth } = useAuth();
@@ -51,18 +27,20 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, resetUser, userAttribs] = useInput('user', '')
+    const [user, resetUser, userAttribs] = useInput('user', '');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [check, toggleCheck] = useToggle('persist', false);
 
     useEffect(() => {
-        userRef.current.focus();
-    }, [])
+        if (userRef.current) {
+            userRef.current.focus();
+        }
+    }, []);
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd])
+    }, [user, pwd]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -91,83 +69,83 @@ const Login = () => {
             } else {
                 setErrMsg('Login Failed');
             }
-            errRef.current.focus();
+            if (errRef.current) {
+                errRef.current.focus();
+            }
         }
-    }
+    };
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
-            sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
             >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Вход в систему
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-                autoFocus
-                {...userAttribs}
-                ref={userRef}
-                />
-                <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Пароль"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                />
-                <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Запомнить меня"
-
-                />
-                <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                >
-                Войти
-                </Button>
-                {/* <Grid container>
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                        Forgot password?
-                        </Link>
-                    </Grid>
-                    <Grid item>
-                        <Link href="#" variant="body2">
-                        {"Don't have an account? Sign Up"}
-                        </Link>
-                    </Grid>
-                </Grid> */}
-            </Box>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Вход в систему
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        {...userAttribs}
+                        inputRef={userRef}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Пароль"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        onChange={(e) => setPwd(e.target.value)}
+                        value={pwd}
+                    />
+                    <FormControlLabel
+                        control={<Checkbox value="remember" color="primary" />}
+                        label="Запомнить меня"
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Войти
+                    </Button>
+                    {/* <Grid container>
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                            Forgot password?
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link href="#" variant="body2">
+                            {"Don't have an account? Sign Up"}
+                            </Link>
+                        </Grid>
+                    </Grid> */}
+                </Box>
             </Box>
             {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
         </Container>
-    )
+    );
 }
 
 export default Login;
