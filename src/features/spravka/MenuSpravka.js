@@ -7,6 +7,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { GlobalFilter, DefaultColumnFilter } from "../../components/TableFilters";
 import { BASE_URL } from "../../config";
 
+import { useLocation, Navigate } from "react-router-dom";
+
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
@@ -33,6 +35,7 @@ const MenuSpravka = () => {
   const axiosPrivate = useAxiosPrivate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { data: spravkas, isLoading, isError } = useFetchSpravkas(axiosPrivate);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -57,9 +60,9 @@ const MenuSpravka = () => {
         accessor: "patient_iin",
       },
       {
-        Header: "Ссылка",
+        Header: "Карточка",
         accessor: "id",
-        Cell: ({ value }) => <a href={`${BASE_URL}/${value}`} target="_blank" rel="noopener noreferrer">Ссылка</a>,
+        Cell: ({ value }) => <Link to={`/spravka/read/${value}`} state={{ from: location }} replace>Открыть</Link> ,
       },
     ],
     []

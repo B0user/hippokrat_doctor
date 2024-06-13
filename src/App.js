@@ -20,6 +20,7 @@ import { ColorModeContext, useMode } from "./theme";
 
 import MenuSpravka from "./features/spravka/MenuSpravka";
 import CreateSpravka from "./features/spravka/CreateSpravka";
+import ReadSpravka from "./features/spravka/ReadSpravka";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
                 <Route path="spravka">
                   <Route index element={<MenuSpravka />} />
                   <Route path="create" element={<CreateSpravka/>} />
+                  <Route path="read/:id" element={<ReadSpravka/>} />
                 </Route>
               </Route>
 
