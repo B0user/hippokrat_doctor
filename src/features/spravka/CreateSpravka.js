@@ -157,8 +157,8 @@ const CreateSpravka = () => {
               
           </div>
             
-            <ReactToPrint
-                trigger={() => <Button variant="contained">Распечатать справку</Button>}
+            <ReactToPrint 
+                trigger={() => <Button style={{ marginTop: '10px' }} variant="contained">Распечатать справку</Button>}
                 content={() => componentRef.current}
             />
 
@@ -205,7 +205,12 @@ const CreateSpravka = () => {
                       id: "type",
                     }}
                   >
-                    <MenuItem value="Гигиеническое обучение">Гигиеническое обучение</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 1">Гигиеническое обучение №1</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 2">Гигиеническое обучение №2</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 3">Гигиеническое обучение №3</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 4">Гигиеническое обучение №4</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 5">Гигиеническое обучение №5</MenuItem>
+                    <MenuItem value="Гигиеническое обучение 6">Гигиеническое обучение №6</MenuItem>
                     <MenuItem value="Осмотр терапевта">Осмотр терапевта</MenuItem>
                   </Select>
                 </FormControl>
