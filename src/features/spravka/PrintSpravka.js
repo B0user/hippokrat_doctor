@@ -10,7 +10,7 @@ import {
     Button
   } from "@mui/material";
 
-const PrintSpravka = ({ spravka }) => {
+const PrintSpravka = ({ spravka, id }) => {
     const componentRef = useRef();
 
     return (
@@ -24,7 +24,7 @@ const PrintSpravka = ({ spravka }) => {
                 <div ref={componentRef} className="printable-component">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <div style={{ marginRight: '20px' }}>
-                            <QRCode url={`${BASE_URL}/${spravka?._id}`} isImage={true} isButton={false} />
+                            <QRCode url={`${BASE_URL}/${id}`} isImage={true} isButton={false} />
                         </div>
                         <div>
                             <h3 fontSize="18px">ТОО «Медицинская фирма "Гиппократ"»</h3>

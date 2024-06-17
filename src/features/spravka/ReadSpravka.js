@@ -24,11 +24,12 @@ const ReadSpravka = () => {
     const { id } = useParams();
     const axiosPrivate = useAxiosPrivate();
     const { data: spravka, isLoading, isError } = useFetchSpravkas(axiosPrivate, id);
+    console.log(spravka);
 
     if (isLoading) return <p>Загрузка...</p>;
     if (isError) return <p>Ошибка при загрузке данных</p>;
 
-    return <PrintSpravka spravka={spravka} />;
+    return <PrintSpravka spravka={spravka} id={id} />;
 };
 
 export default ReadSpravka;

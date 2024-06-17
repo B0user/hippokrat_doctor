@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Header from "../../components/Header";
 
@@ -269,15 +269,14 @@ const CreateSpravka = () => {
 
   return (
       <>
-          {success ? (
-              <PrintSpravka spravka={spravka} />
-          ) : (
-              <SpravkaForm
+          {success 
+          ? <Navigate to={`/spravka/read/${spravka?._id}`} replace /> 
+          : <SpravkaForm
                   handleSubmit={handleSubmit}
                   errMsg={errMsg}
                   setErrMsg={setErrMsg}
               />
-          )}
+          }
       </>
   );
 };
